@@ -157,6 +157,8 @@ lock_create(const char *name)
 	HANGMAN_LOCKABLEINIT(&lock->lk_hangman, lock->lk_name);
 
 	// add stuff here as needed
+	lock -> held = 0;
+	lock -> holder = NULL;
 
 	return lock;
 }
@@ -177,10 +179,22 @@ lock_acquire(struct lock *lock)
 {
 	/* Call this (atomically) before waiting for a lock */
 	//HANGMAN_WAIT(&curthread->t_hangman, &lock->lk_hangman);
-
+	
 	// Write this
+	assert(lock != NULL);
+	bool done = false;
+	
+	while (!done){
+		if (lock -> held == 0){
+			lock -> holder = &curthread;
+			lock -> held = 1;
+			HANGMAN_ACQUIRE(&curthread->t_hangman, &lock->lk_hangman);
+		}
+		else {HANGMAN_WAIT(&curthread->t_hangman, &lock->lk_hangman);}
+	}
+	
 
-	(void)lock;  // suppress warning until code gets written
+	//(void)lock;  // suppress warning until code gets written
 
 	/* Call this (atomically) once the lock is acquired */
 	//HANGMAN_ACQUIRE(&curthread->t_hangman, &lock->lk_hangman);
