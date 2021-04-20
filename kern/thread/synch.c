@@ -186,7 +186,7 @@ lock_acquire(struct lock *lock)
 	
 	while (!done){
 		if (lock->held == 0){
-			lock->holder = &curthread;
+			lock->holder = &curthread->t_name;
 			lock->held = 1;
 			HANGMAN_ACQUIRE(&curthread->t_hangman, &lock->lk_hangman);
 		}
@@ -208,7 +208,7 @@ lock_release(struct lock *lock)
 
 	// Write this
 	KASSERT(lock != NULL);
-	KASSERT(lock->holder == &curthread);
+	KASSERT(lock->holder == &curthread->t_name);
 	if (lock->held == 1){
 		HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 		lock->held = 0;
@@ -221,7 +221,7 @@ bool
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
-	if (lock->holder == &curthread) return true;
+	if (lock->holder == &curthread->t_name) return true;
 	return false;
 	
 	//(void)lock;  // suppress warning until code gets written
