@@ -208,8 +208,8 @@ lock_release(struct lock *lock)
 
 	// Write this
 	KASSERT(lock != NULL);
-	char str1;
-	char str2;
+	const char str1;
+	const char str2;
 	strcpy(str1, lock->holder);
 	strcpy(str2, *curthread->t_name);
 	KASSERT(strcmp(str1, str2) == 0);
@@ -225,8 +225,8 @@ bool
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
-	char str1;
-	char str2;
+	const char str1;
+	const char str2;
 	strcpy(str1, lock->holder);
 	strcpy(str2, *curthread->t_name);
 	if (strcmp(str1, str2) == 0) return true;
