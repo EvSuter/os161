@@ -221,7 +221,7 @@ bool
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
-	if (lock -> holder == &curthread) {return true}
+	if (lock -> holder == &curthread) {return true;}
 	else return false;
 	
 	//(void)lock;  // suppress warning until code gets written
