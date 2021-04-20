@@ -208,7 +208,11 @@ lock_release(struct lock *lock)
 
 	// Write this
 	KASSERT(lock != NULL);
-	KASSERT(strcmp(lock->holder, (const char *)(*curthread->t_name)) == 0);
+	char str1;
+	char str2;
+	strcpy(str1, lock->holder);
+	strcpy(str2, *curthread->t_name);
+	KASSERT(strcmp(str1, str2) == 0);
 	if (lock->held == 1){
 		HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 		lock->held = 0;
@@ -221,7 +225,11 @@ bool
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
-	if (strcmp(lock->holder, (const char *)(*curthread->t_name)) == 0) return true;
+	char str1;
+	char str2;
+	strcpy(str1, lock->holder);
+	strcpy(str2, *curthread->t_name);
+	if (strcmp(str1, str2) == 0) return true;
 	return false;
 	
 	//(void)lock;  // suppress warning until code gets written
