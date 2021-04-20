@@ -181,7 +181,7 @@ lock_acquire(struct lock *lock)
 	//HANGMAN_WAIT(&curthread->t_hangman, &lock->lk_hangman);
 	
 	// Write this
-	assert(lock != NULL);
+	KASSERT(lock != NULL);
 	bool done = false;
 	
 	while (!done){
@@ -207,8 +207,8 @@ lock_release(struct lock *lock)
 	//HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 
 	// Write this
-	assert(lock != NULL);
-	assert(lock -> holder == &curthread);
+	KASSERT(lock != NULL);
+	KASSERT(lock -> holder == &curthread);
 	if (lock -> held == 1){
 		HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 		lock -> held = 0;
