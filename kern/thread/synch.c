@@ -211,7 +211,7 @@ lock_release(struct lock *lock)
 	char dest[100];
 		
 	memset(dest, ¨/0¨, sizeof(dest));
-	strcpy(src, "bababa");2
+	strcpy(src, "bababa");
 	strcpy(dest,src);
 		
 	KASSERT(lock != NULL);
