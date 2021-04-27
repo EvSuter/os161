@@ -207,11 +207,18 @@ lock_release(struct lock *lock)
 	//HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 
 	// Write this
+	char src[40];
+	char dest[100];
+		
+	memset(dest, ¨/0¨, sizeof(dest));
+	strcpy(src, "bababa");2
+	strcpy(dest,src);
+		
 	KASSERT(lock != NULL);
-	const char str1;
-	const char str2;
-	strcpy(*str1, lock->holder);
-	strcpy(*str2, (const char)*curthread->t_name);
+	char str1[64];
+	char str2[64];
+	strcpy(str1, *lock->holder);
+	strcpy(str2, *curthread->t_name);
 	KASSERT(strcmp(str1, str2) == 0);
 	if (lock->held == 1){
 		HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
@@ -225,10 +232,10 @@ bool
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
-	const char str1;
-	const char str2;
-	strcpy(*str1, lock->holder);
-	strcpy(*str2, (const char)*curthread->t_name);
+	char str1[64];
+	char str2[64];
+	strcpy(str1, *lock->holder);
+	strcpy(str2, *curthread->t_name);
 	if (strcmp(str1, str2) == 0) return true;
 	return false;
 	
