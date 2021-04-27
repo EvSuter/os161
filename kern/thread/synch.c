@@ -186,7 +186,7 @@ lock_acquire(struct lock *lock)
 	
 	while (!done){
 		if (lock->held == 0){
-			lock->holder = &curthread->t_name;
+			lock->holder = curthread->t_name;
 			lock->held = 1;
 			HANGMAN_ACQUIRE(&curthread->t_hangman, &lock->lk_hangman);
 		}
