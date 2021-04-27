@@ -217,8 +217,8 @@ lock_release(struct lock *lock)
 	KASSERT(lock != NULL);
 	char str1[64];
 	char str2[64];
-	strcpy(str1, *(lock->holder));
-	strcpy(str2, *(curthread->t_name));
+	strcpy(str1, lock->holder);
+	strcpy(str2, curthread->t_name);
 	KASSERT(strcmp(str1, str2) == 0);
 	if (lock->held == 1){
 		HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
@@ -234,8 +234,8 @@ lock_do_i_hold(struct lock *lock)
 	// Write this
 	char str1[64];
 	char str2[64];
-	strcpy(str1, *(lock->holder));
-	strcpy(str2, *(curthread->t_name));
+	strcpy(str1, lock->holder);
+	strcpy(str2, curthread->t_name);
 	if (strcmp(str1, str2) == 0) return true;
 	return false;
 	
