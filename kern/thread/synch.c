@@ -206,14 +206,7 @@ lock_release(struct lock *lock)
 	/* Call this (atomically) when the lock is released */
 	//HANGMAN_RELEASE(&curthread->t_hangman, &lock->lk_hangman);
 
-	// Write this
-	char src[40];
-	char dest[100];
-		
-	memset(dest, ¨/0¨, sizeof(dest));
-	strcpy(src, "bababa");
-	strcpy(dest,src);
-		
+	// Write this	
 	KASSERT(lock != NULL);
 	char str1[64];
 	char str2[64];
